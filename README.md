@@ -12,7 +12,7 @@ npm start
 ```
 
 `
-API Base path: TO DO 
+API Base path: https://e-voting-application.herokuapp.com/
 `
 # Below are the APIs currently available
 ### Elections API
