@@ -20,13 +20,13 @@ API Base path: https://e-voting-application.herokuapp.com/
 #### Get all Elections:
 HTTP Method: GET
 ```http
-/api/electionName
+/api/election/list
 ```
 
 #### Create an Election:
 HTTP Method: POST
 ```http
-/api/electionName
+/api/election
 ```
 ##### Request body
  JSON request Body:

@@ -28,13 +28,13 @@ async function getElectionId() {
     return `ELECTION_NO_${electionListCount.length + 1}`;
 }
 
-app.get('/api/electionName', async (req, res) => {
+app.get('/api/election/list', async (req, res) => {
     const electionList = await Election.find();
     const modifiedList = underscore.map(electionList, election => getFormatedElectionList(election));
     res.send(modifiedList);
 });
 
-app.post('/api/electionName', async (req, res) => {
+app.post('/api/election', async (req, res) => {
     const electionId = await getElectionId();
     const newElection = new Election({
         election_id: electionId,
