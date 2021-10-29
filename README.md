@@ -33,7 +33,6 @@ HTTP Method: POST
 
 ```javascript
 {
-  "election_id": string,
   "election_name": string,
   "candidates": [{
 		"name": string
