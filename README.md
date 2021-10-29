@@ -75,7 +75,7 @@ HTTP Method: POST
 #### Create new Voter API
 HTTP Method: POST
 ```http
-/api/admin
+/api/voter
 ```
 ##### Request body
  JSON request Body:
@@ -90,7 +90,7 @@ HTTP Method: POST
 #### Voter Login API
 HTTP Method: POST
 ```http
-/api/admin/login
+/api/voter/login
 ```
 ##### Request body
  JSON request Body:
