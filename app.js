@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
-const Election = require('./models/electionName');
+const Election = require('./models/election');
 const Admin = require('./models/admin')
+const Voter = require('./models/voter')
 const md5 = require('md5');
 const underscore = require('underscore')
 require('./db/mongoose');
@@ -18,11 +19,12 @@ app.get('/', function(req, res) {
 function getFormatedElectionList(election) {
     return {
         'election_id': election.election_id,
-        'election_organizer': election.election_organizer,
-        'election_name': election.election_name
+        'election_name': election.election_name,
+        'candidates': election.candidates
     }
 }
 
+// Election APIs
 async function getElectionId() {
     const electionListCount = await Election.find();
     return `ELECTION_NO_${electionListCount.length + 1}`;
@@ -39,8 +41,7 @@ app.post('/api/election', async (req, res) => {
     const newElection = new Election({
         election_id: electionId,
         election_name: req.body.election_name,
-        election_organizer: req.body.election_organizer,
-        election_password: md5(req.body.election_password),
+        candidates: req.body.candidates
     });
     newElection.save((error, doc) => {
         if (!error) {
@@ -55,6 +56,8 @@ app.post('/api/election', async (req, res) => {
     });
 });
 
+
+// Admin APIs
 app.post('/api/admin/login', async (req, res) => {
     const adminFound = await Admin.findOne({
         username: req.body.username,
@@ -77,6 +80,36 @@ app.post('/api/admin', async (req, res) => {
         console.error(`Error while creating the admin user: ${error}`)
         return res.status(500).json({
             message: `Error while creating the admin user. ${error.message}`,
+            error: error
+        });
+    });
+});
+
+// Voter APIs
+
+app.post('/api/voter/login', async (req, res) => {
+    const voterFound = await Voter.findOne({
+        username: req.body.username,
+        password: md5(req.body.password),
+    });
+    (voterFound) ? res.send(true) : res.send(false);
+});
+
+app.post('/api/voter', async (req, res) => {
+    const newVoter = new Voter({
+        username: req.body.username,
+        password: md5(req.body.password),
+        electionId: req.body.electionId
+    });
+    newVoter.save((error, doc) => {
+        if (!error) {
+            const successMessage = `The voter user '${doc.username}' has been created Successfully`;
+            console.log(successMessage)
+            return res.json({ message: successMessage });
+        }
+        console.error(`Error while creating the voter: ${error}`)
+        return res.status(500).json({
+            message: `Error while creating the voter. ${error.message}`,
             error: error
         });
     });

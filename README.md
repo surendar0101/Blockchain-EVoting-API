@@ -23,7 +23,7 @@ HTTP Method: GET
 /api/election/list
 ```
 
-#### Create an Election:
+#### Create a new Election:
 HTTP Method: POST
 ```http
 /api/election
@@ -33,9 +33,11 @@ HTTP Method: POST
 
 ```javascript
 {
+  "election_id": string,
   "election_name": string,
-  "election_organizer": string,
-  "election_password": string
+  "candidates": [{
+		"name": string
+	}]
 }
 ```
 
@@ -55,6 +57,37 @@ HTTP Method: POST
 }
 ```
 #### Admin Login API
+HTTP Method: POST
+```http
+/api/admin/login
+```
+##### Request body
+ JSON request Body:
+
+```javascript
+{
+	"username": string,
+	"password": string
+}
+```
+
+### Voter APIs
+#### Create new Voter API
+HTTP Method: POST
+```http
+/api/admin
+```
+##### Request body
+ JSON request Body:
+
+```javascript
+{
+	"electionId": string,
+	"username": string,
+	"password": string
+}
+```
+#### Voter Login API
 HTTP Method: POST
 ```http
 /api/admin/login
