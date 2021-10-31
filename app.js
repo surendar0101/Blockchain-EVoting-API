@@ -1,10 +1,8 @@
 const express = require('express');
 const cors = require('cors');
-const Election = require('./models/election');
 const Admin = require('./models/admin')
 const Voter = require('./models/voter')
 const md5 = require('md5');
-const underscore = require('underscore')
 require('./db/mongoose');
 
 const app = express();
@@ -74,7 +72,7 @@ app.post('/api/voter', async (req, res) => {
     });
 });
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8001;
 app.listen(port, () => {
     console.log(`Server running at ${port}/`);
 });
