@@ -1,9 +1,9 @@
 const mongoose = require('mongoose'), Schema = mongoose.Schema;
 
-const adminSchema = new Schema({
-    electionId: { type: String, required: true },
+const voterSchema = new Schema({
+    id: { type: Number },
     username:{ type: String, required: true},
     password: { type: String, required: true}
 });
 
-module.exports = mongoose.model('voter', adminSchema);
+module.exports = mongoose.model('voter', voterSchema);
