@@ -15,6 +15,36 @@ npm start
 API Base path: https://e-voting-application.herokuapp.com/
 `
 # Below are the APIs currently available
+### Admin APIs
+#### Create new Admin API
+HTTP Method: POST
+```http
+/api/admin
+```
+##### Request body
+ JSON request Body:
+
+```javascript
+{
+	"username": string,
+	"password": string
+}
+```
+#### Admin Login API
+HTTP Method: POST
+```http
+/api/admin/login
+```
+##### Request body
+ JSON request Body:
+
+```javascript
+{
+	"username": string,
+	"password": string
+}
+```
+
 ### Voter APIs
 #### Create new Voter API
 HTTP Method: POST
